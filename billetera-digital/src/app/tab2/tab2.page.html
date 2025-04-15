@@ -1,0 +1,70 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Transferencias
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Historial de Transferencias</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item *ngIf="transacciones.length === 0" lines="none">
+      <ion-label class="ion-text-center">
+        No hay transacciones registradas
+      </ion-label>
+    </ion-item>
+
+    @for (transaccion of transacciones; track transaccion.id) {
+    <ion-item>
+      <ion-card style="width: 100%;">
+        <ion-card-header>
+          <ion-card-subtitle>
+            <ion-icon name="calendar-outline"></ion-icon> {{transaccion.fecha | date:'dd/MM/yyyy HH:mm'}}
+          </ion-card-subtitle>
+          <ion-card-title>
+            <ion-icon [name]="obtenerIconoTransaccion(transaccion.tipo)"></ion-icon>
+            {{obtenerTituloTransaccion(transaccion.tipo)}}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-chip>
+                  <ion-icon name="arrow-up-outline" color="danger"></ion-icon>
+                  <ion-label>De: {{obtenerNombreCuenta(transaccion.cuentaOrigen)}}</ion-label>
+                </ion-chip>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-chip>
+                  <ion-icon name="arrow-down-outline" color="success"></ion-icon>
+                  <ion-label>A: {{obtenerNombreCuenta(transaccion.cuentaDestino)}}</ion-label>
+                </ion-chip>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-text color="primary">
+                  <h2 class="ion-text-center">Monto: ${{transaccion.monto.toFixed(2)}}</h2>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+    }
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Cargando..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

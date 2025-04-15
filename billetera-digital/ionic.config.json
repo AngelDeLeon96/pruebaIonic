@@ -1,0 +1,7 @@
+{
+  "name": "billetera-digital",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
