@@ -73,14 +73,6 @@ ionic capacitor add ios
 ionic capacitor copy ios
 ```
 
-## Contribuir
-
-1. Hacer fork del repositorio
-2. Crear una rama para tu nueva característica (`git checkout -b feature/nueva-caracteristica`)
-3. Hacer commit de tus cambios (`git commit -m 'Añadir nueva característica'`)
-4. Hacer push a la rama (`git push origin feature/nueva-caracteristica`)
-5. Abrir un Pull Request
-
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT - ver el archivo LICENSE para más detalles.
