@@ -1,4 +1,4 @@
-# Billetera Digital
+# Billetera Digital Neobank
 
 ## Descripción
 Billetera Digital es una aplicación móvil desarrollada con Ionic/Angular que permite a los usuarios gestionar sus cuentas bancarias, realizar transferencias y consultar el historial de transacciones. Está diseñada para proporcionar una experiencia de usuario intuitiva y eficiente para la gestión financiera personal.
@@ -7,7 +7,7 @@ Billetera Digital es una aplicación móvil desarrollada con Ionic/Angular que p
 
 - **Gestión de Cuentas**: Visualización de cuentas bancarias con detalles como número de cuenta y saldo disponible.
 - **Transferencias**: Realizar transferencias entre cuentas y consultar el historial de transacciones.
-- **Perfil de Usuario**: Acceso a información del perfil y configuraciones personales.
+- *Criptomonedas**: Permite visualizar y comprar criptomonedas usando el saldo de las cuentas disponibles.
 
 ## Tecnologías utilizadas
 
@@ -23,7 +23,7 @@ La aplicación está organizada en una estructura de pestañas (tabs):
 
 - **Tab1 (Cuentas)**: Muestra el listado de cuentas disponibles del usuario con su saldo.
 - **Tab2 (Transferencias)**: Muestra el historial de transferencias realizadas.
-- **Tab3 (Perfil)**: Sección para gestionar el perfil del usuario.
+- **Tab3 (Bienvenida)**: Sección inicial.
 
 ## Requisitos previos
 
