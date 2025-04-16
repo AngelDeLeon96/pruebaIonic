@@ -44,6 +44,8 @@ cd billetera-digital
 
 2. Instalar dependencias
 ```bash
+npm install -g @angular/cli
+npm install -g @ionic/cli
 npm install
 ```
 
