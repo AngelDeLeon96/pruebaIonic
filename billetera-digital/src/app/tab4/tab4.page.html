@@ -13,6 +13,30 @@
     </ion-toolbar>
   </ion-header>
 
+  <!-- Mi Portafolio -->
+  <ion-card color="white" *ngIf="criptosUsuario.length > 0">
+    <ion-card-header>
+      <ion-card-title>Mi Portafolio</ion-card-title>
+      <ion-card-subtitle color="medium">Tus criptomonedas</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list lines="full">
+        <ion-item *ngFor="let cripto of criptosUsuario">
+          <ion-thumbnail slot="start">
+            <img [alt]="cripto.name" [src]="getImageUrl(cripto.symbol)">
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ cripto.name }} ({{ cripto.symbol }})</h2>
+            <p>{{ cripto.monto | number: '1.2-8' }} {{ cripto.symbol }}</p>
+            <p>Valor: ${{ cripto.monto * cripto.price | number: '1.2-2' }} USD</p>
+          </ion-label>
+          <ion-button fill="outline" slot="end" (click)="venderCriptomoneda(cripto)">Vender</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
   <ion-card color="white">
     <ion-card-header>
       <ion-card-title>Comprar Criptomonedas</ion-card-title>
@@ -21,104 +45,48 @@
 
     <ion-card-content>
       <ion-list lines="full">
-        <ion-item>
+        <ion-item *ngFor="let cripto of criptomonedas">
           <ion-thumbnail slot="start">
-            <img alt="Bitcoin" src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png">
+            <img [alt]="cripto.name" [src]="getImageUrl(cripto.symbol)">
           </ion-thumbnail>
           <ion-label>
-            <h2>Bitcoin (BTC)</h2>
-            <p>$61,245.00 USD</p>
+            <h2>{{ cripto.name }} ({{ cripto.symbol }})</h2>
+            <p>${{ cripto.price | number: '1.2-2' }} USD</p>
           </ion-label>
-          <ion-button fill="outline" slot="end">Comprar</ion-button>
-        </ion-item>
-
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img alt="Ethereum" src="https://assets.coingecko.com/coins/images/279/large/ethereum.png">
-          </ion-thumbnail>
-          <ion-label>
-            <h2>Ethereum (ETH)</h2>
-            <p>$3,054.62 USD</p>
-          </ion-label>
-          <ion-button fill="outline" slot="end">Comprar</ion-button>
-        </ion-item>
-
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img alt="BNB" src="https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png">
-          </ion-thumbnail>
-          <ion-label>
-            <h2>BNB (BNB)</h2>
-            <p>$551.48 USD</p>
-          </ion-label>
-          <ion-button fill="outline" slot="end">Comprar</ion-button>
-        </ion-item>
-
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img alt="Solana" src="https://assets.coingecko.com/coins/images/4128/large/solana.png">
-          </ion-thumbnail>
-          <ion-label>
-            <h2>Solana (SOL)</h2>
-            <p>$142.10 USD</p>
-          </ion-label>
-          <ion-button fill="outline" slot="end">Comprar</ion-button>
+          <ion-button fill="outline" slot="end" (click)="abrirModalCompra(cripto)">Comprar</ion-button>
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
 
-  <ion-card color="white">
+  <!-- Información de Cuentas Disponibles -->
+  <ion-card color="white" *ngIf="cuentasUsuario.length > 0">
     <ion-card-header>
-      <ion-card-title>Opciones de Compra</ion-card-title>
+      <ion-card-title>Tus Cuentas</ion-card-title>
+      <ion-card-subtitle color="medium">Saldos disponibles para compras</ion-card-subtitle>
     </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="floating">Monto a invertir (USD)</ion-label>
-        <ion-input type="number" placeholder="0.00"></ion-input>
-      </ion-item>
 
-      <ion-item>
-        <ion-label>Método de pago</ion-label>
-        <ion-select placeholder="Seleccionar">
-          <ion-select-option value="saldo">Saldo disponible</ion-select-option>
-          <ion-select-option value="tarjeta">Tarjeta de crédito/débito</ion-select-option>
-          <ion-select-option value="transferencia">Transferencia bancaria</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <div class="ion-padding-top">
-        <ion-button expand="block">Confirmar compra</ion-button>
-      </div>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card color="white">
-    <ion-card-header>
-      <ion-card-title>Historial de Compras</ion-card-title>
-    </ion-card-header>
     <ion-card-content>
       <ion-list lines="full">
-        <ion-item>
+        <ion-item *ngFor="let cuenta of cuentasUsuario">
           <ion-label>
-            <h2>Bitcoin (BTC)</h2>
-            <p>Compra: 0.005 BTC</p>
-            <p>Fecha: 10/04/2025</p>
+            <h2>{{ cuenta.nombre }}</h2>
+            <p>Cuenta: {{ cuenta.numeroCuenta }}</p>
+            <p>Saldo: ${{ cuenta.saldoDisponible | number: '1.2-2' }}</p>
           </ion-label>
-          <ion-note slot="end" color="medium">$315.50 USD</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h2>Ethereum (ETH)</h2>
-            <p>Compra: 0.15 ETH</p>
-            <p>Fecha: 05/04/2025</p>
-          </ion-label>
-          <ion-note slot="end" color="medium">$450.78 USD</ion-note>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-button fill="clear" size="small" expand="block">Ver historial completo</ion-button>
         </ion-item>
       </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Mensaje cuando no hay cuentas -->
+  <ion-card color="light" *ngIf="cuentasUsuario.length === 0">
+    <ion-card-header>
+      <ion-card-title>Sin Cuentas Disponibles</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Debes tener al menos una cuenta con saldo para poder comprar criptomonedas.</p>
+      <ion-button expand="block" routerLink="/tabs/tab1">Ir a Cuentas</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

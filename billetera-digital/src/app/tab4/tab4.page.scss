@@ -1,0 +1,43 @@
+/* Estilos para el modal de confirmación de compra */
+.alert-confirmacion {
+  --backdrop-opacity: 0.8;
+}
+
+.confirmacion-compra {
+  padding: 10px;
+  text-align: left;
+}
+
+.confirmacion-compra h4 {
+  color: var(--ion-color-primary);
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.confirmacion-compra p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.confirmacion-compra strong {
+  font-weight: 600;
+  color: var(--ion-color-dark);
+}
+
+/* Resaltar el total a pagar */
+.confirmacion-compra p:nth-child(5) {
+  font-size: 16px;
+  color: var(--ion-color-primary);
+  margin: 15px 0;
+  padding: 8px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  background-color: rgba(var(--ion-color-primary-rgb), 0.05);
+}
+
+/* Resaltar el saldo después de compra */
+.confirmacion-compra p:last-child {
+  color: var(--ion-color-success);
+}
