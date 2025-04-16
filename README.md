@@ -24,6 +24,7 @@ La aplicación está organizada en una estructura de pestañas (tabs):
 - **Tab1 (Cuentas)**: Muestra el listado de cuentas disponibles del usuario con su saldo.
 - **Tab2 (Transferencias)**: Muestra el historial de transferencias realizadas.
 - **Tab3 (Bienvenida)**: Sección inicial.
+- **Tab4 (Criptomonedas)**: Sección donde se pueden comprar criptomonedas.
 
 ## Requisitos previos
 
