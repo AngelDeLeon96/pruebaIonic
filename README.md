@@ -47,7 +47,8 @@ npm install
 
 3. Ejecutar en modo desarrollo
 ```bash
-ionic serve
+ionic serve o 
+ng serve
 ```
 
 ## Compilación para producción
