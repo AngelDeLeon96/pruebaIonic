@@ -10,6 +10,7 @@ export interface Cuenta {
     uid: string;
     tipo: string;
 }
+
 export interface CuentaConUID {
     uid: string;
 }
