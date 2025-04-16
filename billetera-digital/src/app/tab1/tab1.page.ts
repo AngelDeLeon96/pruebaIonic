@@ -63,7 +63,7 @@ export class Tab1Page implements OnInit, OnDestroy {
 
     // Primero, mostrar un alert para seleccionar la cuenta origen
     const alertOrigen = await this.alertController.create({
-      header: 'Selecciona cuenta origen',
+      header: 'Selecciona la cuenta de origen',
       inputs: inputs,
       buttons: [
         {
@@ -106,7 +106,7 @@ export class Tab1Page implements OnInit, OnDestroy {
     }
 
     const alertDestino = await this.alertController.create({
-      header: 'Selecciona cuenta destino',
+      header: 'Selecciona la cuenta de destino',
       inputs: cuentasDestino,
       buttons: [
         {

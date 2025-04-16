@@ -106,14 +106,15 @@ export class DataService {
     getTransacciones(): Transaccion[] {
         return this.transaccionesSubject.value;
     }
+
     getCuentasConUID(): CuentaConUID[] {
         return this.getCuentas().map(cuenta => ({ uid: cuenta.uid }));
     }
+
     // Método para realizar una transferencia
     realizarTransferencia(cuentaOrigenUID1: number, cuentaDestinoUID1: number, monto: number): Promise<boolean> {
         return new Promise((resolve, reject) => {
             const cuentas = this.getCuentas();
-            const indice = this.getCuentasConUID();
 
             const cuentaOrigen = cuentas.find(c => c.numeroCuenta === cuentaOrigenUID1);
             const cuentaDestino = cuentas.find(c => c.numeroCuenta === cuentaDestinoUID1);

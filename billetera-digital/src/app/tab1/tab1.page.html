@@ -16,21 +16,29 @@
   <ion-list>
 
     @for (cuenta of cuentas; track cuenta.uid; let index = $index) {
-    <ion-item>
-      <ion-card style="width: 100%;">
+    <ion-item lines="none">
+      <ion-card style="width: 100%;" color="white">
         <ion-card-header>
-          <ion-card-title><ion-icon name="planet-outline"></ion-icon>{{cuenta.nombre}}</ion-card-title>
-          <ion-card-subtitle><ion-icon name="receipt-outline"></ion-icon> {{cuenta.numeroCuenta}}</ion-card-subtitle>
+          <ion-card-title>
+            @if (cuenta.tipo == 'ahorro'){
+            <ion-icon name="star-outline"></ion-icon>
+            } @else {
+            <ion-icon name="bag-outline"></ion-icon>
+            }
+            {{cuenta.nombre}}
+          </ion-card-title>
+          <ion-card-subtitle color="medium"><ion-icon name="receipt-outline"></ion-icon>
+            {{cuenta.numeroCuenta}}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
           <ion-grid>
-            <ion-chip>
+            <ion-chip color="medium">
               <ion-row>
-                <ion-col size="2" class="ion-flex ion-align-items-center">
+                <ion-col size="1" class="ion-flex ion-align-items-center">
                   <ion-icon name="cash-outline"></ion-icon>
                 </ion-col>
                 <ion-col size="auto">
-                  Saldo: ${{cuenta.saldoDisponible}}
+                  Saldo Disponible: ${{cuenta.saldoDisponible}}
                 </ion-col>
               </ion-row>
             </ion-chip>
@@ -42,7 +50,7 @@
   </ion-list>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="mostrarFormularioTransferencia()">
+    <ion-fab-button color="dark" (click)="mostrarFormularioTransferencia()">
       <ion-icon name="swap-horizontal-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

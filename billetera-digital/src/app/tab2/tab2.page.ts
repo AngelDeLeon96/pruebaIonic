@@ -33,7 +33,7 @@ export class Tab2Page implements OnInit, OnDestroy {
   }
 
   // Obtener el nombre de la cuenta por su ID
-  obtenerNombreCuenta(numeroCuenta: string): string {
+  obtenerNombreCuenta(numeroCuenta: number): string {
     return this.dataService.obtenerNombreCuenta(numeroCuenta);
   }
 
