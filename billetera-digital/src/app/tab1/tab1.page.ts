@@ -28,7 +28,8 @@ export class Tab1Page implements OnInit, OnDestroy {
     // Suscribirse al observable de cuentas
     this.subscriptions.add(
       this.dataService.cuentas$.subscribe(cuentas => {
-        this.cuentas = cuentas;
+        this.cuentas = cuentas && cuentas.length > 0 ? cuentas : [];
+        console.log('Cuentas actualizadas:', this.cuentas);
       })
     );
   }
@@ -71,8 +72,9 @@ export class Tab1Page implements OnInit, OnDestroy {
         },
         {
           text: 'Siguiente',
-          handler: (cuentaOrigenId) => {
-            this.seleccionarCuentaDestino(cuentaOrigenId);
+          handler: (cuentaOrigen) => {
+            console.log('Cuenta origen seleccionada:', cuentaOrigen);
+            this.seleccionarCuentaDestino(cuentaOrigen);
           }
         }
       ]
@@ -82,10 +84,11 @@ export class Tab1Page implements OnInit, OnDestroy {
   }
 
   // Método para seleccionar la cuenta destino
-  async seleccionarCuentaDestino(cuentaOrigenId: string) {
+  async seleccionarCuentaDestino(cuentaOrigen: number) {
+    console.log('Cuenta origen seleccionada:', cuentaOrigen);
     // Filtrar las cuentas para no mostrar la cuenta origen
     const cuentasDestino: AlertInput[] = this.cuentas
-      .filter(c => c.numeroCuenta !== cuentaOrigenId)
+      .filter(c => c.numeroCuenta !== cuentaOrigen)
       .map(cuenta => ({
         type: 'radio',
         label: `${cuenta.nombre} (${cuenta.numeroCuenta})`,
@@ -112,8 +115,8 @@ export class Tab1Page implements OnInit, OnDestroy {
         },
         {
           text: 'Siguiente',
-          handler: (cuentaDestinoId) => {
-            this.ingresarMonto(cuentaOrigenId, cuentaDestinoId);
+          handler: (cuentaDestino) => {
+            this.ingresarMonto(cuentaOrigen, cuentaDestino);
           }
         }
       ]
@@ -123,8 +126,14 @@ export class Tab1Page implements OnInit, OnDestroy {
   }
 
   // Método para ingresar el monto a transferir
-  async ingresarMonto(cuentaOrigenId: string, cuentaDestinoId: string) {
-    const cuentaOrigen = this.cuentas.find(c => c.numeroCuenta === cuentaOrigenId)!;
+  async ingresarMonto(cuentaOrigenUID: number, cuentaDestinoUID: number) {
+
+    const cuentaOrigen = this.cuentas.find(c => c.numeroCuenta === cuentaOrigenUID);
+
+    if (!cuentaOrigen) {
+      this.mostrarError('Cuenta origen no encontrada.');
+      return;
+    }
 
     const alert = await this.alertController.create({
       header: 'Ingresa el monto',
@@ -151,7 +160,7 @@ export class Tab1Page implements OnInit, OnDestroy {
               this.mostrarError('Monto inválido. Debe ser mayor a 0 y no exceder tu saldo disponible.');
               return false;
             }
-            this.realizarTransferencia(cuentaOrigenId, cuentaDestinoId, monto);
+            this.realizarTransferencia(cuentaOrigenUID, cuentaDestinoUID, monto);
             return true;
           }
         }
@@ -172,9 +181,9 @@ export class Tab1Page implements OnInit, OnDestroy {
   }
 
   // Método para realizar la transferencia
-  async realizarTransferencia(cuentaOrigenId: string, cuentaDestinoId: string, monto: number) {
+  async realizarTransferencia(cuentaOrigenUID: number, cuentaDestinoUID: number, monto: number) {
     // Usar el servicio para realizar la transferencia
-    const resultado = this.dataService.realizarTransferencia(cuentaOrigenId, cuentaDestinoId, monto);
+    const resultado = await this.dataService.realizarTransferencia(cuentaOrigenUID, cuentaDestinoUID, monto);
 
     if (resultado) {
       // Mostrar confirmación

@@ -14,7 +14,8 @@
   </ion-header>
 
   <ion-list>
-    @for (cuenta of cuentas; track cuenta.numeroCuenta; let index = $index) {
+
+    @for (cuenta of cuentas; track cuenta.uid; let index = $index) {
     <ion-item>
       <ion-card style="width: 100%;">
         <ion-card-header>
@@ -29,7 +30,7 @@
                   <ion-icon name="cash-outline"></ion-icon>
                 </ion-col>
                 <ion-col size="auto">
-                  Saldo: ${{cuenta.saldoDisponible.toFixed(2)}}
+                  Saldo: ${{cuenta.saldoDisponible}}
                 </ion-col>
               </ion-row>
             </ion-chip>
